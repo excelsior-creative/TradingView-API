@@ -77,7 +77,7 @@ const setupPriceInfo = async () => {
 
   chart.setMarket('BINANCEUS:BTCUSD', {
     timeframe: '60',
-    range: 60,
+    range: 26,
   });
 
   chart.onSymbolLoaded(() => {
@@ -87,10 +87,12 @@ const setupPriceInfo = async () => {
   const chartUpdatePromise = new Promise((resolve, reject) => {
     chart.onUpdate(() => {
       console.log('OK', chart.periods);
-      const ema12 = chart.periods.slice(0, 12).reduce((a: any, b: any) => a.close + b.close, 0) / 12;
-      const ema26 = chart.periods.slice(0, 26).reduce((a: any, b: any) => a.close + b.close, 0) / 26;
+
+      const ema12 = (chart.periods.slice(0, 12).map((d: any) => d.close).reduce((a: any, b: any) => a + b, 0)) / 12;
+      const ema26 = (chart.periods.slice(0, 26).map((d: any) => d.close).reduce((a: any, b: any) => a + b, 0)) / 26;
+
       const direction = ema12 > ema26 ? 'long' : 'short';
-      console.log(ema12, ema26);
+      console.log(direction, ema12, ema26);
       client.end();
       resolve(direction);
     });
