@@ -7,9 +7,9 @@ const TradingView = require('../main');
 */
 
 const config = {
-  symbol: 'BINANCE:BTCEUR',
-  timeframe: 'D',
-  startFrom: Math.round(Date.now() / 1000) - 86400 * 7, // Seven days before now
+  symbol: 'BINANCE:BTCUSD',
+  timeframe: 'H',
+  startFrom: Math.round(Date.now() / 1000) - 86400 * 700 // Seven hundred days before now
   // startFrom: 1600000000,
 };
 
@@ -21,18 +21,18 @@ const chart = new client.Session.Chart();
 chart.setMarket(config.symbol, {
   timeframe: config.timeframe,
   replay: config.startFrom,
-  range: 1,
+  range: 1
 });
 
-// chart.onReplayLoaded(() => {
-//   console.log('STARTING REPLAY MODE');
-//   chart.replayStart(1000);
+chart.onReplayLoaded(() => {
+  console.log('STARTING REPLAY MODE');
+  chart.replayStart(1000);
 
-//   // setTimeout(() => {
-//   //   console.log('STOPPING REPLAY MODE');
-//   //   chart.replayStop();
-//   // }, 7000);
-// });
+  // setTimeout(() => {
+  //   console.log('STOPPING REPLAY MODE');
+  //   chart.replayStop();
+  // }, 7000);
+});
 
 let loading = 0;
 const indicators = [];
@@ -82,7 +82,9 @@ async function addIndicator(name, pineId, options = {}) {
   const indic = pineId.includes('@')
     ? new TradingView.BuiltInIndicator(pineId)
     : await TradingView.getIndicator(pineId);
-  Object.keys(options).forEach((o) => { indic.setOption(o, options[o]); });
+  Object.keys(options).forEach((o) => {
+    indic.setOption(o, options[o]);
+  });
 
   const std = new chart.Study(indic);
 

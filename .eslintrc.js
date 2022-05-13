@@ -4,21 +4,21 @@ module.exports = {
     es2021: true,
     node: true,
   },
-  extends: [
-    'airbnb-base',
-  ],
-  parser: '@babel/eslint-parser',
+  extends: ["airbnb-base"],
+  parser: "@babel/eslint-parser",
   parserOptions: {
     ecmaVersion: 12,
     requireConfigFile: false,
   },
   rules: {
-    'no-console': 'off',
-    'import/no-extraneous-dependencies': [
-      'error',
+    "no-console": "off",
+    "import/no-extraneous-dependencies": [
+      "error",
       {
-        devDependencies: ['./test.js', './tests/**'],
+        devDependencies: ["./test.js", "./tests/**"],
       },
     ],
+    "linebreak-style": 0,
+    quotes: [2, "single", "double", { avoidEscape: true }],
   },
-};
+}

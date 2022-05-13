@@ -1,0 +1,11 @@
+{
+  "serverlessConsole.services": [
+    {
+      "type": "dynamodb",
+      "title": "tcm-portfolio10FEB8EA-PQDBLQSH2UKX",
+      "tableName": "tcm-portfolio10FEB8EA-PQDBLQSH2UKX",
+      "awsProfile": "default",
+      "region": "us-west-2"
+    }
+  ]
+}
