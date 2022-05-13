@@ -77,7 +77,7 @@ const setupPriceInfo = async () => {
 
   chart.setMarket('BINANCEUS:BTCUSD', {
     timeframe: '60',
-    range: 26,
+    range: 100,
   });
 
   chart.onSymbolLoaded(() => {
@@ -93,6 +93,11 @@ const setupPriceInfo = async () => {
 
       const direction = ema12 > ema26 ? 'long' : 'short';
       console.log(direction, ema12, ema26);
+
+      // const negativeDays = [];
+      // const positiveDats = [];
+      // const rsi100 = chart.periods
+
       client.end();
       resolve(direction);
     });
